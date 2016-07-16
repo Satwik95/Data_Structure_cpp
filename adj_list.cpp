@@ -11,7 +11,7 @@ using namespace std;
 struct AdjListNode
 {
     int dest;
-    struct AdjListNode* next;
+    AdjListNode* next;
 };
  
 /*
@@ -19,7 +19,7 @@ struct AdjListNode
  */  
 struct AdjList
 {
-    struct AdjListNode *head;
+    AdjListNode *head;
 };
  
 /*
@@ -29,7 +29,7 @@ class Graph
 {
     private:
         int V;
-        struct AdjList* array;
+        AdjList* array;
     public:
         Graph(int V)
         {

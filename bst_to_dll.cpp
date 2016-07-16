@@ -14,7 +14,7 @@ struct node
 // Linked List
 // root --> Root of Binary Tree
 // head --> Pointer to head node of created doubly linked list
-void BinaryTree2DoubleLinkedList(node *root, node **head)
+node* BinaryTree2DoubleLinkedList(node *root, node *head)
 {
     // Base case
     if (root == NULL) return;
@@ -74,7 +74,7 @@ int main()
  
     // Convert to DLL
     node *head = NULL;
-    BinaryTree2DoubleLinkedList(root, &head);
+    BinaryTree2DoubleLinkedList(root,head);
  
     // Print the converted list
     printList(head);
