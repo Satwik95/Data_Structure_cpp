@@ -30,13 +30,23 @@ class Graph
     private:
         int V;
         AdjList* array;
+        bool visited;
     public:
         Graph(int V)
-        {
+        {	visited = new bool[V];
             this->V = V;
             array = new AdjList [V];
             for (int i = 0; i < V; ++i)
-                array[i].head = NULL;
+               {
+               	array[i].head = NULL;
+               } 
+
+            for(int i = 0;i<V;i++)
+            {
+            	visited[i] = FALSE;
+            }   
+
+
         }
         /*
          * Creating New Adjacency List Node
@@ -77,6 +87,33 @@ class Graph
                 }
                 cout<<endl;
             }
+        }
+
+        void dfs(int start)
+        {
+
+        	visited[start] = true;
+        	cout<<"visiting:"+ AdjList[start].head;
+
+
+        	for(AdjListNode* temp = array[start].head; temp!=NULL;temp = temp->next)
+        	{
+        		if(!visited(array[temp->dest].head))
+        			cout<<"visiting:"+ AdjList[temp->dest].head;
+        			dfs(array[temp->dest].head);
+
+        	}
+        	
+        	for(int i = 0;i<V;i++)
+        	{
+        		if(!visited[i])
+        		{
+        			dfs(i);
+        		}
+        	}
+
+
+
         }
 };
 

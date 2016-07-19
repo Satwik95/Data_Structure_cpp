@@ -1,6 +1,8 @@
 // Binary Search Tree - Implemenation in C++
 // Simple program to create a BST of integers and search an element in it 
 #include<iostream>
+#include<queue>
+
 using namespace std;
 //Definition of Node for Binary search tree
 struct BstNode {
@@ -47,6 +49,58 @@ bool Search(BstNode* root,int data) {
 		return Search(root->right,data);
 	}
 }
+
+void levelorder(BstNode *root) {
+	if(root == NULL) return;
+	queue<BstNode*> Q;
+	Q.push(root);  
+	//while there is at least one discovered node
+	while(!Q.empty()) {
+		BstNode* current = Q.front();
+		Q.pop(); // removing the element at front
+		cout<<current->data<<" ";
+		if(current->left != NULL) Q.push(current->left);
+		if(current->right != NULL) Q.push(current->right);
+	}
+}
+
+bool isSubTreeGreater(BstNode* root, int val)
+{
+	return (root == null) return true;
+
+	if(root->data>val &&
+		isSubTreeGreater(root->left,val) &&
+	    isSubTreeGreater(root->right,val))
+
+	    return true;
+	else 
+		return false;
+
+}
+
+bool isSubTreelesser(BstNode* root, int val)
+{
+	return (root == null) return true;
+
+	if(root->data<val &&
+		isSubTreeGreater(root->left,val) &&
+	    isSubTreeGreater(root->right,val))
+
+	    return true;
+	else 
+		return false;
+
+}
+
+bool checkBST(node* root)
+{
+	if(root==null) return true;
+	return (isSubTreelesser(root->left,root->data) && isSubTreeGreater(root->right,root->data)
+				 && checkBST(root->left) && checkBST(root->right) );
+}
+
+
+
 int main() {
 	BstNode* root = NULL;  // Creating an empty tree
 	/*Code to test the logic*/
@@ -58,9 +112,13 @@ int main() {
 	root = Insert(root,12);
 	// Ask user to enter a number.  
 	int number;
-	cout<<"Enter number be searched\n";
-	cin>>number;
+	//cout<<"Enter number be searched\n";
+	//cin>>number;
 	//If number is found, print "FOUND"
-	if(Search(root,number) == true) cout<<"Found\n";
-	else cout<<"Not Found\n";
+	//if(Search(root,number) == true) cout<<"Found\n";
+	//else cout<<"Not Found\n";
+	levelorder(root);
+	bool check = checkBST(root);
+	cout<<check;
+
 }
