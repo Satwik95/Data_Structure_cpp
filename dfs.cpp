@@ -90,17 +90,21 @@ class Graph
         }
 
         void dfs(int start)
-        {
-
+         {
         	visited[start] = true;
-        	cout<<"visiting:"+ AdjList[start].head;
+        	cout<<"visiting:"+ start;
 
 
-        	for(AdjListNode* temp = array[start].head; temp!=NULL;temp = temp->next)
+        	AdjListNode* temp = array[start].head;
+
+            while(temp!=null)
         	{
-        		if(!visited(array[temp->dest].head))
-        			cout<<"visiting:"+ AdjList[temp->dest].head;
-        			dfs(array[temp->dest].head);
+        		if(!visited[temp->dest])
+        			dfs(temp->dest);
+
+                else
+                    temp=temp->next;
+                    dfs(temp->dest);
 
         	}
         	
