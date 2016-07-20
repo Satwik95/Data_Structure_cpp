@@ -1,6 +1,7 @@
 //N Queens Problem
 
 #include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 int n;
@@ -13,9 +14,10 @@ bool isSafe(int r, int i)
 		return 1;
 	if(r>0 && r<n && i>=0 && i<n)
 	{
-		for(j=r-1;j>=0;j--)
+		for(j=r-1;j>=0;j--)   //j=r-1 because we need to start checking with the prvious row as we called isSafe(r+1)
 		{
-			if((i>0 && q[j][i-(r-j)]) || q[j][i] || q[j][i+(r-j)])
+			if((i>0 &&   q[j][i-(r-j)])  ||   q[j][i] ||      q[j][i+(r-j)])   //check in six direction
+						//first diagonal     //same column  //second diagonal
 				return 0;
 		}
 		return 1;
@@ -25,7 +27,7 @@ bool isSafe(int r, int i)
 
 bool nqueen(int r)
 {
-	if(r == n)
+	if(r == n)   //r stands for row
 		return 1;
 	int i;
 	for(i=0;i<n;i++)	//for each cell in a row
@@ -33,10 +35,10 @@ bool nqueen(int r)
 		if(isSafe(r,i))
 		{
 			q[r][i] = 1;
-			if(nqueen(r+1))
-				return 1;
+			if(nqueen(r+1))  //recursive call for the next n rows
+				return 1;	 // if next row is being attacked for the given co-ordinate then return false 
 			else
-				q[r][i] = 0;
+				q[r][i] = 0;   //set the previous allocated position as 0 and go to the next cell
 		}
 	}
 	return 0;
@@ -60,13 +62,9 @@ int main()
 	cout<<"Enter number of queens!";
 	cin>>n;
 	int i, j;
-	for(i=0;i<n;i++)
-	{
-		for(j=0;j<n;j++)
-		{
-			q[i][j] = 0;
-		}
-	}
+
+	memset(q,0,sizeof(q));
+
 	if(nqueen(0))
 		print();
 	else
